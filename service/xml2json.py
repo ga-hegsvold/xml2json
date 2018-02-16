@@ -9,7 +9,6 @@ import os
 def get_api_stream(url, params=None, headers=None):
     """Fetch byte stream from an endpoint"""
 
-    logging.info(datetime.datetime.now())
     logging.debug("-> get_api_stream()")
     logging.debug("Request url: %s" % url)
 
