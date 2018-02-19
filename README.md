@@ -2,7 +2,7 @@
 A micro-service for reading an xml byte stream from an api and transforming it to json.
 
 ## Environment variables
-`JWT` - JSON Web Token granting access to CONFIG_ENDPOINT and all ENDPOINTs defined in CONFIG_ENDPOINT
+`JWT` - JSON Web Token granting access to node instance
 
 `NODE` - base url to the sesam node instance api (ex: "https://abcd1234.sesam.cloud/api")
 
