@@ -48,6 +48,8 @@ def main(url):
 
     xml_url = xml_api + "/" + url  # or 'https://boardgamegeek.com/xmlapi/collection/Zodiac'
 
+    logging.info(xml_url)
+
     xml_response = get_api_stream(xml_url)
 
     # TODO: Only supports utf-8 encoded xml for now
