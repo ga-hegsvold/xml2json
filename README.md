@@ -44,7 +44,7 @@ endpoint:
   "type": "pipe",
   "source": {
     "type": "json",
-    "system": "xml2json",
+    "system": "bgg",
     "url": "/collection/Zodiac"
   },
   "transform": {
