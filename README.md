@@ -1,18 +1,36 @@
 # xml2json (experimental)
-A micro-service for reading an xml byte stream from an api and transforming it to json.
+A micro service for reading an xml byte stream from an api and transforming it to JSON.
 
-<!-- TODO:
 ## Environment variables
 
 `XML_API` - url to xml api
--->
+
+### Optional
+
+`LOG_LEVEL` the level of logging _(default: INFO)_ (Ref: https://docs.python.org/3/howto/logging.html#logging-levels)
+
+## Docker
+
+Image: https://hub.docker.com/r/gamh/xml2json/
+
+## Endpoints
+
+The service is running on port 5000 and accepts connections to the following
+endpoint:
+
+    GET /<xml-stream>
+
+`xml-stream` is the api endpoint to fetch data from.
 
 ## Example Sesam System Config
 ```
 {
-  "_id": "xml2json",
+  "_id": "bgg",
   "type": "system:microservice",
-  "docker": 
+  "docker": {
+    "environment": {
+      "XML_API": "https://boardgamegeek.com/xmlapi"
+    },
     "image": "gamh/xml2json:latest",
     "port": 5000
   }
@@ -22,12 +40,12 @@ A micro-service for reading an xml byte stream from an api and transforming it t
 ## Example Sesam Pipe Config
 ```
 {
-  "_id": "my-boardgame-collection",
+  "_id": "bgg-boardgame",
   "type": "pipe",
   "source": {
     "type": "json",
     "system": "xml2json",
-    "url": "/https://boardgamegeek.com/xmlapi/collection/Zodiac"
+    "url": "/collection/Zodiac"
   },
   "transform": {
     "type": "dtl",

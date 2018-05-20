@@ -38,14 +38,15 @@ def xml_to_json(xml):
 
 @app.route('/<path:url>')
 def main(url):
-    logging.basicConfig(level=logging.DEBUG)  # dump log to stdout
+    log_level = logging.getLevelName(os.environ.get('LOG_LEVEL', 'INFO'))  # default log level = INFO
+    logging.basicConfig(level=log_level)  # dump log to stdout
+
     logging.debug(datetime.datetime.now())
 
     # fetch env vars
-    #xml_api = os.environ.get('XML_API') # or "https://boardgamegeek.com/xmlapi/collection/Zodiac"
+    xml_api = os.environ.get('XML_API')  # or "https://boardgamegeek.com/xmlapi/collection/Zodiac"
 
-    #xml_url = xml_api + url # or 'https://boardgamegeek.com/xmlapi/collection/Zodiac'
-    xml_url = url # or 'https://boardgamegeek.com/xmlapi/collection/Zodiac'
+    xml_url = xml_api + "/" + url  # or 'https://boardgamegeek.com/xmlapi/collection/Zodiac'
 
     xml_response = get_api_stream(xml_url)
 
@@ -56,12 +57,11 @@ def main(url):
     xml_data = xml_data.replace('<?xml version="1.0" encoding="utf-8" standalone="yes"?>', '')
 
     json_data = xml_to_json(xml_data)
-    print(json_data)
-    # why is xml header included in sesam when it's not included here?!?
-    # pipe config ignores system ref when pipe.source.url does not start with '/'
+
+    logging.debug(json_data)
 
     return Response(json_data, mimetype='application/json')
 
 
 if __name__ == "__main__":
-    app.run(debug=True, host='0.0.0.0')
+    app.run(debug=True, host='0.0.0.0', port=5000)
