@@ -4,7 +4,7 @@ import datetime
 import xmltodict
 import json
 import os
-from flask import Flask, request, Response
+from flask import Flask, Response
 
 app = Flask(__name__)
 
